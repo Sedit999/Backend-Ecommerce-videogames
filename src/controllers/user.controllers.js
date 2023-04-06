@@ -11,6 +11,16 @@ const getUsers = async (req, res) => {
   }
 };
 
+const getUser = async (req, res) => {
+  const { username, email } = req.body;
+  try {
+    const getUser = await User.findById(req.user.id, { username, email });
+    res.json(getUser);
+  } catch (error) {
+    res.status(500).json({ msg: "Hubo un error al actualizar el usuario" });
+  }
+};
+
 const createUser = async (req, res) => {
   const { username, email, password } = req.body;
   const salt = await bcryptjs.genSalt(10);
@@ -103,4 +113,11 @@ const loginUser = async (req, res) => {
   }
 };
 
-module.exports = { getUsers, createUser, updateUser, verifyUser, loginUser };
+module.exports = {
+  getUsers,
+  getUser,
+  createUser,
+  updateUser,
+  verifyUser,
+  loginUser,
+};

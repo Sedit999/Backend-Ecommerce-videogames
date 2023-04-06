@@ -10,11 +10,15 @@ const userSchema = mongoose.Schema(
     email: {
       type: String,
       require: true,
+      autocomplete: true,
       /* unique: true, */
     },
     password: {
       type: String,
       require: true,
+    },
+    games: {
+      type: [String],
     },
   },
   {
